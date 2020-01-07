@@ -10,7 +10,7 @@ def pytest_addoption(parser):
                      help="Choose language: ec or fr")
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def browser(request):
     browser_name = request.config.getoption('browser_name')
     user_language = request.config.getoption('language')
@@ -28,5 +28,6 @@ def browser(request):
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
     yield browser
-    print("\nquit browser..")
+    #print("\nquit browser..")
     browser.quit()
+
