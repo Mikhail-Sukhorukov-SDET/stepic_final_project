@@ -24,7 +24,7 @@ def test_guest_can_add_product_to_basket(browser, link):
     product_page.should_be_valid_after_adding_product_data()
 
 
-@pytest.mark.xfail
+@pytest.mark.xfail(reason=" After adding product to basket - 'After adding' messages should be on page ")
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
     product_page = ProductPage(browser, link)
@@ -43,7 +43,8 @@ def test_guest_cant_see_success_message(browser):
     product_page.should_not_be_after_adding_messages()
 
 
-@pytest.mark.xfail
+@pytest.mark.xfail(
+    reason=" After adding product to basket - 'After adding' messages should not be disappeared from page ")
 def test_message_disappeared_after_adding_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
     product_page = ProductPage(browser, link)
@@ -52,5 +53,3 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     product_page.adding_product_to_basket()
     product_page.solve_quiz_and_get_code()
     product_page.should_disappear_after_adding_messages()
-
-
