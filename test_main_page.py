@@ -6,7 +6,7 @@ import pytest
 
 @pytest.mark.login_guest
 class TestLoginFromMainPage():
-    #@pytest.mark.xfail(reason="Main page contain different login link #registration_link from other pages #login_link")
+    @pytest.mark.xfail(reason="Main page contain different login link #registration_link from other pages #login_link")
     def test_guest_can_go_to_login_page(self, browser):
         link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
         main_page = MainPage(browser, link)
@@ -15,7 +15,7 @@ class TestLoginFromMainPage():
         login_page = LoginPage(browser, link)
         login_page.should_be_login_page()
 
-    #@pytest.mark.xfail(reason="Main page contain different login link #registration_link from other pages #login_link")
+    @pytest.mark.xfail(reason="Main page contain different login link #registration_link from other pages #login_link")
     def test_guest_should_see_login_link(self, browser):
         link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
         main_page = MainPage(browser, link)
