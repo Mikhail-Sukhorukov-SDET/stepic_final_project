@@ -28,7 +28,7 @@ def test_guest_can_add_product_to_basket(browser, link):
 
 @pytest.mark.xfail(reason=" After adding product to basket - 'After adding' messages should be on page ")
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
     product_page = ProductPage(browser, link)
     product_page.open()
     product_page.should_be_product_page()
@@ -38,7 +38,7 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
 
 
 def test_guest_cant_see_success_message(browser):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
     product_page = ProductPage(browser, link)
     product_page.open()
     product_page.should_be_product_page()
@@ -84,5 +84,32 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     basket_page.should_not_be_product_in_basket()
     basket_page.should_be_basket_is_empty_message()
 
+
+@pytest.mark.user_add_to_busket_from_product_page
+class TestUserAddToBasketFromProductPage():
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
+        registration_page = LoginPage(browser, link)
+        registration_page.open()
+        registration_page.should_be_login_page()
+        registration_page.register_new_user()
+        registration_page.should_be_authorized_user()
+
+    def test_user_cant_see_success_message(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+        product_page = ProductPage(browser, link)
+        product_page.open()
+        product_page.should_be_product_page()
+        product_page.should_not_be_after_adding_messages()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+        product_page = ProductPage(browser, link)
+        product_page.open()
+        product_page.should_be_product_page()
+        product_page.adding_product_to_basket()
+        product_page.solve_quiz_and_get_code()
+        product_page.should_be_valid_after_adding_product_data()
 
 
