@@ -14,8 +14,15 @@ class ProductPageLocators():
     AFTER_ADDING_BASKET_PRICE_TEXT = (By.CSS_SELECTOR, "#messages div:nth-child(3) strong")
 
 
+class BasketPageLocators():
+    BASKET_HEADER_TEXT = (By.CSS_SELECTOR, "div.page-header.action h1")
+    BASKET_IS_EMPTY_TEXT = (By.CSS_SELECTOR, '#content_inner p')
+    PRODUCTS_IN_BASKET = (By.CSS_SELECTOR, "#basket_formset")
+
+
 class BasePageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    BASKET_LINK = (By.XPATH, "//a[@class='btn btn-default']")
 
 
