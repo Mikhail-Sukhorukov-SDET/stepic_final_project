@@ -14,7 +14,6 @@ def pytest_addoption(parser):
 def browser(request):
     browser_name = request.config.getoption('browser_name')
     user_language = request.config.getoption('language')
-    browser = None
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")
         options = Options()
